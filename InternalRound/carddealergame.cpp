@@ -18,17 +18,18 @@ int main()
 {
     ios::sync_with_stdio(false), cin.tie(nullptr);
 
-    ll n, x, y, wa, wb;
+    ll n, r, b;
     cin >> n;
-    cin >> wa >> wb;
 
-    for(ll i=0;i<n-1;i++)
+    vector<vector<ll>> dp(n, vector<ll>(2,0));
+    cin >> dp[0][0] >> dp[0][1];
+
+    for(ll i=1;i<n;i++)
     {
-        cin >> x >> y;
-        ll tmp = (wa*x + wb*y)%p;
-        wb = (wb*x + wa*y)%p;
-        wa = tmp;
+        cin >> r >> b;
+        dp[i][0] = (dp[i-1][0]*r + dp[i-1][1]*b)%p;
+        dp[i][1] = (dp[i-1][1]*r + dp[i-1][0]*b)%p;
     }
- 
-    cout << (wa*powmod(wa+wb, p-2))%p;
+
+    cout << (a[n-1]*powmod(a[n-1]+b[n-1], p-2))%p;
 }
